@@ -235,7 +235,7 @@ class HighDimVisualizer:
             for n_neighbors in n_neighbors_list:
                 for min_dist in min_dists:
                     umap_model = umap.UMAP(n_components=2, n_neighbors=n_neighbors, 
-                                    min_dist=min_dist, random_state=self.random_state)
+                                    min_dist=min_dist, random_state=self.random_state,metric=)
                     X_umap = umap_model.fit_transform(X)
                     
                     scatter = axes[plot_idx].scatter(X_umap[:, 0], X_umap[:, 1], c=y, 
@@ -359,7 +359,7 @@ class HighDimVisualizer:
         plt.tight_layout()
         plt.show()
     
-    def plot_interactive_3d(self, X, y, feature_names):
+    def plot_interactive_3d(self, X, y, feature_names,title = None):
         """
         Интерактивная 3D визуализация с использованием Plotly.
         """
@@ -390,7 +390,7 @@ class HighDimVisualizer:
         
         explained_variance = pca.explained_variance_ratio_
         fig.update_layout(
-            title=f'3D PCA проекция данных<br>Объясненная дисперсия: {sum(explained_variance):.2%}',
+            title=title or f'3D PCA проекция данных<br>Объясненная дисперсия: {sum(explained_variance):.2%}',
             scene=dict(
                 xaxis_title=f'PC1 ({explained_variance[0]:.2%})',
                 yaxis_title=f'PC2 ({explained_variance[1]:.2%})',
